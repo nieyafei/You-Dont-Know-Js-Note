@@ -1,19 +1,19 @@
 @import 'iconfont/iconfont.css';
 
 .gt-container .gt-btn,.gt-container .gt-btn:hover{
-    background-color: #ffc20e;
+    background-color: #f58220;
 }
 .gt-container .gt-header-controls-tip,.gt-container a:hover,.gt-container a,.gt-container .gt-comment-username{
-    color: #ffc20e;
+    color: #f58220;
 }
 .gt-container .gt-svg svg{
-    fill: #ffc20e;
+    fill: #f58220;
 }
 .gt-container .gt-link{
-    border-bottom: #ffc20e;
+    border-bottom: #f58220;
 }
 .gt-container .gt-popup .gt-action.is--active:before{
-    background-color: #ffc20e;
+    background-color: #f58220;
 }
 
 .sidebar .sidebar-nav li{
@@ -21,7 +21,7 @@
 }
 .sidebar .sidebar-nav li span{
     display: inline-block;
-    color: #ffc20e;
+    color: #f58220;
     position: absolute;
     top:-2px;
     left: -24px;
@@ -54,13 +54,13 @@
     display: inline-block;
     content: "\e70a";
     font-size: 30px;
-    color: #ffc20e;
+    color: #f58220;
 }
 .sidebar ul li a .iconS::before{
     font-size: 14px;
 }
 
-.markdown-section{max-width: 1000px;}
+.markdown-section{max-width: 800px;}
 .full-page.vuep{flex-direction: column;height: inherit;}
 .full-page .vuep-editor,.full-page  .vuep-preview,.full-page  .vuep-error{width: 100%;}
 .vuep-preview{background-color: #fff;}
