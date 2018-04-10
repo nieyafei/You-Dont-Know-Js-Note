@@ -4,10 +4,9 @@
 
   * 作用域是什么
     * [编译原理](scope/compile.md)
-    * [提升](scope/hoisting.md)
   * 词法作用域
   * 函数作用域和块级作用域
-  * 提升
+  * [提升](scope/hoisting.md)
   * 作用域闭包
 
 * 第二部分：this和对象原型
