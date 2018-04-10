@@ -4,6 +4,7 @@
 
   * 作用域是什么
     * [编译原理](scope/compile.md)
+    * [提升](scope/hoisting.md)
   * 词法作用域
   * 函数作用域和块级作用域
   * 提升
