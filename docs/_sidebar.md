@@ -8,6 +8,7 @@
   * 函数作用域和块级作用域
   * [提升](scope/hoisting.md)
   * 作用域闭包
+    * [实质问题到懂闭包](scope/close.md)
 
 * 第二部分：this和对象原型
   * 关于this
