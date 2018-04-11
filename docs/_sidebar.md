@@ -9,6 +9,7 @@
   * [提升](scope/hoisting.md)
   * 作用域闭包
     * [实质问题到懂闭包](scope/close.md)
+    * [循环和闭包](scope/for.md)
 
 * 第二部分：this和对象原型
   * 关于this
