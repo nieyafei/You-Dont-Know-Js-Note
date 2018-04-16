@@ -1,4 +1,4 @@
-# 关于this
+## 关于this
 
 ?> `this`关键词是javascript中最复杂的机制之一
 
@@ -29,4 +29,7 @@ speak.call(you);// Hello HTML
 
 > 这段代码可以在不同的上下文对象（me和you）中重复使用函数 `identify()`和`speak()`，不用针对每个对象编写不同版本的函数
 
+## 指向自身
 
+
+## 它的作用域
