@@ -13,7 +13,7 @@
     * [模块](scope/module.md)
 
 * 第二部分：this和对象原型
-  * 关于this
+  * [关于this](this/about.md)
   * this全面解析
   * 对象
   * 混合对象“类”
