@@ -14,7 +14,7 @@
 
 * 第二部分：this和对象原型
   * [关于this](this/about.md)
-  * this全面解析
+  * [this全面解析](this/analysis.md)
   * 对象
   * 混合对象“类”
   * 原型
