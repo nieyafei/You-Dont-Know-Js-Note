@@ -33,6 +33,43 @@ baz();// baz的调用位置
 
 ### 1、默认绑定
 
+?> 最常用的函数调用类型：独立函数调用
+
+```js
+function foo(){
+  console.log(this.a);// 此时的this指向全局对象，也就是默认的绑定
+}
+
+var a = 2;
+foo();
+```
+
+**如果使用严格模式（strict mode），则不能将全局对象用于默认对象，此时的this会绑定到`undefined`**
+
+- **使用严格模式绑定**
+
+```js
+function foo(){
+  “use strict”;
+  console.log(this.a);
+}
+
+var a = 2;
+foo();// TypeError: this is undefined
+```
+
+- **使用严格模式调用**
+
+```js
+function foo(){
+  console.log(this.a);
+}
+
+var a = 2;
+(function(){
+  foo();// 2
+})()
+```
 
 ### 2、隐式绑定
 
