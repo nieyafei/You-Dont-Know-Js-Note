@@ -189,17 +189,94 @@ var bar = function(){
   return foo.apply(obj,arguments);
 }
 
-var b = bar(3);
-console.log(b);
+var b = bar(3);// 2  3
+console.log(b);// 5
+```
+
+**重复使用的辅助函数**
+
+```js
+function foo(something){
+  console.log(this.a,something);
+  return this.a + something;
+}
+
+// 辅助绑定函数
+function bind(fn,obj){
+  return function(){
+    return fn.apply(obj,arguments);
+  }
+}
+
+var obj = {a:2}
+var bar = bind(foo,obj);
+
+var b = bar(3);// 2  3
+console.log(b);// 5
+```
+
+?> ES5对于硬绑定中提供了内置方法Function.prototype.bind
+
+```js
+function foo(something){
+  console.log(this.a,something);
+  return this.a + something;
+}
+
+var obj = {a:2}
+var bar = foo.bind(foo);// bind(...)会返回一个硬编码的新函数
+
+var b = bar(3);// 2  3
+console.log(b);// 5
+```
+- ### 2、API调用的“上下文”
+
+?> 第三方库的许多函数，js语言和宿主环境中许多新的内置函数，提供了一种可选的参数，这通常称为“上下文（context）”,作用：确保回调函数指定的this
+
+```js
+function foo(el){
+  console.log(el,this.id);
+}
+
+var obj = {
+  id: "nihao"
+}
+
+[1,2,3].forEach(foo,obj);
+
+// 1 nihao 2 nihao 3 nihao
 ```
 
 ### 4、new绑定
 
+?> 形式：something = new MyClass(...);
 
+**使用new来调用函数，或发生构造函数调用,会执行以下操作：**
+
+> 1、创建（构造）一个全新的对象
+
+> 2、这个新对象会执行`[[prototype]]`连接
+
+> 3、这个新对象会绑定到函数调用的this
+
+> 4、如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回这个新对象
+
+```js
+function foo(a){
+  this.a = a;
+}
+
+var bar = new foo(2);// 新对象绑定到foo中的this
+console.log(bar.a);// 2
+```
 
 ## 优先级
 
+?> 上面说到的四种规则（`默认规则`、`显式绑定`、`隐式绑定`、`new绑定`），这些规则的优先级是怎么样的？
 
+**显而，默认规则的优先级是最低的**
+
+- ### 显式绑定 VS 隐式绑定
 
 ## 绑定例外
 
