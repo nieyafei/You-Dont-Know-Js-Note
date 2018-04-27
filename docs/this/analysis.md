@@ -372,7 +372,70 @@ console.log(baz.a);// 3
 
 ## 绑定例外
 
+- ### 被忽略的this
 
+?> 如果把`null`、`undefined`作为this绑定的对象传入call、apply或者bind,这些调用会被忽略，实际应用的`默认绑定规则`
+
+```js
+function foo(){
+  console.log(this.a);
+}
+
+var a = 2;
+foo.call( null );// 2  this指向了window
+```
+比较常见的做法是使用apply或者call、bind进行绑定，apply会传入一个数组（call传入多个参数），bind则对参数进行柯里化
+
+```js
+function foo(a,b){
+  console.log("结果：" + a + b);
+}
+
+// 传入数组
+foo.apply(null,[2,3]);
+
+// bind进行柯里化
+var bar = foo.bind(null,2);
+bar(3);
+```
+
+- ### 更安全的this
+
+对于传入null会造成一些副作用，因此可以使用特殊的对象，进行绑定操作
+
+```js
+function foo(a,b){
+  console.log("结果：" + a + b);
+}
+
+var nl = Object.create(null);// 空对象
+
+// 传入数组
+foo.apply(nl,[2,3]);
+
+// bind进行柯里化
+var bar = foo.bind(null,2);
+bar(3);
+```
+
+- ### 间接使用
+
+```js
+function foo(){
+  console.log(this.a);
+}
+
+var a = 2;
+var o = {a: 3,foo:foo}
+var p = {a: 4}
+
+o.foo();// 3
+(p.foo=o.foo);// 2
+```
+
+?> 对于默认绑定来说，决定this的绑定对象不是调用位置是否处于严格模式，而是函数体是否处于严格模式，如果函数体处于严格模式，this会绑定到undefined,否则this会绑定到全局对象
+
+- ### 软绑定
 
 ## this词法
 
