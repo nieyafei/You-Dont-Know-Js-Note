@@ -278,6 +278,98 @@ console.log(bar.a);// 2
 
 - ### 显式绑定 VS 隐式绑定
 
+```js
+function foo(){
+  console.log(this.a)
+}
+
+var obj1 = {
+  a: 2,
+  foo: foo
+}
+var obj2 = {
+  a: 3,
+  foo: foo
+}
+
+// 隐式绑定
+obj1.foo();// 2
+obj2.fooo();// 3
+
+// 显式绑定
+obj1.foo.bind(obj2);// 3
+obj2.foo.bind(obj);// 2
+```
+
+?> 显式绑定优先级更高
+
+- ### new 绑定 VS 隐式绑定
+
+```js
+function foo(fn){
+  this.a = fn;
+}
+
+var obj1 = {
+  foo: foo
+};
+
+var obj2 = {};
+
+// 隐式绑定
+obj1.foo(2);
+console.log(obj1.a);// 2
+
+obj1.foo.call(obj2,3);
+console.log(obj2.a);// 3
+
+// new 绑定
+var bar = new obj1.foo(4);
+console.log(obj1.a);// 2
+console.log(bar.a);// 4
+```
+
+?> new 绑定比隐式绑定优先级高
+
+- ### new 绑定 VS 显式绑定
+
+> new 和call、apply无法一起使用，因此需要硬绑定来测试
+
+```js
+function foo(some){
+  this.a = some;
+}
+
+var obj1 = {};
+
+// 硬绑定
+var bar = foo.bind(obj1);
+bar(2);
+
+console.log(bar.a);// 2
+
+var baz = new Bar(3);
+
+console.log(obj1.a);// 2
+console.log(baz.a);// 3
+```
+
+?> new 绑定修改了硬绑定调用的this指向，硬绑定属于显式绑定的一种，因此new绑定优先于显示绑定
+
+- ### 为什么要在new 中使用硬绑定函数呢？
+
+?> 主要的目的是预先设置函数的一些参数，这样在使用new 进行初始化的时候就可以传入其余的参数。主要的功能之一就是把除了第一个参数之外的其他参数传给下层的函数，是`柯里化`的一种
+
+**判断this的规则：**
+
+?> 1、判断是否在 `new` 中调用？如果是，this绑定的是新创建的对象， var bar = new foo();
+
+?> 2、函数是否通过call、apply或者硬绑定（bind）调用？，如果是，this绑定的是指定的对象；var bar = foo.call(obj2);
+
+?> 3、函数是否在某个上下文对象中调用（隐式绑定）？如果是，this绑定的是哪个上下文对象； var bar = obj1.foo();
+
+?> 4、如果都不是的话，则是默认绑定，如果在严格模式下，就绑定到undefined,否则绑定到全局对象； var bar = foo();
+
 ## 绑定例外
 
 
@@ -285,6 +377,9 @@ console.log(bar.a);// 2
 ## this词法
 
 
+**参考资料：**
+
+[Function.prototype.bind()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 
 
 
