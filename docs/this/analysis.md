@@ -437,8 +437,44 @@ o.foo();// 3
 
 - ### 软绑定
 
+?> 软绑定不仅可以实现和硬绑定一样的效果，同时保留隐式绑定或者显式绑定修改this的能力
+
+```js
+if(!Function.prototype.softBind){
+  // 创建原型方法
+  Function.prototype.softBind = function(obj){
+    var fn = this;
+    var curried = [].slice.call(argument,1);// 获取参数
+    var bound = function(){
+      return fn.apply(
+        (!this || this === (window || global))?
+        obj:this,
+        curried.concat.apply(curried,argument)
+      );// 处理this
+    };
+    bound.prototype = Object.create( fn.prototype );
+    return bound;
+  }
+}
+```
+
 ## this词法
 
+?> 箭头函数 `=>`,不使用的this的四种标准规则，而是根据外层（函数或者全局）作用域来决定this
+
+```js
+function foo(){
+  return (a)=>{
+    console.log( this.a );
+  }
+}
+
+var obj1 = {a:2};
+var obj2 = {a:3};
+
+var bar = foo.call( obj1 );
+bar.call( obj2 );// 2
+```
 
 **参考资料：**
 
